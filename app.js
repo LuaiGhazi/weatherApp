@@ -94,8 +94,8 @@ form.addEventListener('submit', async function (e) {
     //Stores the value in the input
     const searchTerm = form.elements.query.value;
     //Using axios for the get request
-    const res = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${searchTerm}&APPID=18893db06dc07b8725a3235643189f47&units=metric`)
-    const res_forecast = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${searchTerm}&appid=18893db06dc07b8725a3235643189f47&units=metric`)
+    const res = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchTerm}&APPID=18893db06dc07b8725a3235643189f47&units=metric`)
+    const res_forecast = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${searchTerm}&appid=18893db06dc07b8725a3235643189f47&units=metric`)
     console.log(res_forecast.data)
     // console.log(res.data.main.feels_like)
     //Today's Forecast 
