@@ -13,3 +13,15 @@
 p {
     margin: 0;
   }
+
+.main-card-text{
+    text-align: center;
+}
+
+.currentWeather{
+    font-size: 45px;
+}
+
+li{
+    text-align: center;
+}

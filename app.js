@@ -59,12 +59,33 @@ const forecastFivePressure = document.querySelector('#forecastFivePressure')
 const forecastFiveAverageTemp = document.querySelector('#forecastFiveAverageTemp')
 const forecastFiveTempMax = document.querySelector('#forecastFiveTempMax')
 const forecastFiveTempMin = document.querySelector('#forecastFiveTempMin')
+// Day of week 
+const dayZero = document.querySelector('#dayZero')
+const dayOne = document.querySelector('#dayOne')
+const dayTwo = document.querySelector('#dayTwo')
+const dayThree = document.querySelector('#dayThree')
+const dayFour = document.querySelector('#dayFour')
+const dayFive = document.querySelector('#dayFive')
 
-String.prototype.toProperCase = function () {
-    return this.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
-};
+//TitleCase
+function toTitleCase(str) {
+    return str.replace(
+        /\w\S*/g,
+        function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+    );
+}
 
+//Date
+function dayofWeek(date) {
+    let gsDayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    d = new Date(date)
+    dayName = gsDayNames[d.getDay()]
+    return dayName
+}
 
+//Weather Info 
 form.addEventListener('submit', async function (e) {
     //Forms are set to refresh a page automatically after being submitted. 
     //This prevents our page from refreshing when the search input that 
@@ -74,12 +95,15 @@ form.addEventListener('submit', async function (e) {
     const searchTerm = form.elements.query.value;
     //Using axios for the get request
     const res = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${searchTerm}&APPID=18893db06dc07b8725a3235643189f47&units=metric`)
-    // console.log(res.data)
+    const res_forecast = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${searchTerm}&appid=18893db06dc07b8725a3235643189f47&units=metric`)
+    console.log(res_forecast.data)
     // console.log(res.data.main.feels_like)
     //Today's Forecast 
     currentWeather.innerHTML = res.data.weather[0].main
-    currentWeatherDesc.innerHTML = res.data.weather[0].description
-    console.log(currentWeather.innerHTML)
+    currentWeatherDesc.innerHTML = toTitleCase(res.data.weather[0].description)
+    dayZero.innerHTML = dayofWeek(res_forecast.data.list[0].dt_txt.substring(0, 10))
+    console.log(dayofWeek(res_forecast.data.list[0].dt_txt.substring(0, 10)))
+
     if (currentWeather.innerHTML === 'Clouds') {
         currentDayImg.src = 'imgs/cloudy.jpg'
     } else if (currentWeather.innerHTML === 'Clear') {
@@ -87,21 +111,17 @@ form.addEventListener('submit', async function (e) {
     } else {
         currentDayImg.src = 'imgs/snow.jpg'
     }
-    feelsLike.innerHTML = res.data.main.feels_like
-    humidity.innerHTML = res.data.main.humidity
+    feelsLike.innerHTML = Math.round(res.data.main.feels_like)
+    humidity.innerHTML = Math.round(res.data.main.humidity)
     pressure.innerHTML = res.data.main.pressure
-    averageTemp.innerHTML = res.data.main.temp
-    tempMax.innerHTML = res.data.main.temp_max
-    tempMin.innerHTML = res.data.main.temp_min
+    averageTemp.innerHTML = Math.round(res.data.main.temp)
+    tempMax.innerHTML = Math.round(res.data.main.temp_max)
+    tempMin.innerHTML = Math.round(res.data.main.temp_min)
+
     //Tomorrow's Forecast 
-    const res_forecast = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${searchTerm}&appid=18893db06dc07b8725a3235643189f47&units=metric`)
-    console.log(res_forecast.data)
-    // let date = new Date(res_forecast.data.list[3].dt_text)
-    // console.log(date)
-    // day.innerHTML = days[now.getDay() + 1]
-    // console.log(days[now.getDay()])
     forecastOneWeather.innerHTML = res_forecast.data.list[3].weather[0].main
-    forecastOneWeatherDesc.innerHTML = res_forecast.data.list[3].weather[0].description
+    forecastOneWeatherDesc.innerHTML = toTitleCase(res_forecast.data.list[3].weather[0].description)
+    dayOne.innerHTML = dayofWeek(res_forecast.data.list[3].dt_txt.substring(0, 10))
     if (forecastOneWeather.innerHTML === 'Clouds') {
         forecastOneImg.src = 'imgs/cloudy.jpg'
     } else if (forecastOneWeather.innerHTML === 'Clear') {
@@ -109,16 +129,17 @@ form.addEventListener('submit', async function (e) {
     } else {
         forecastOneImg.src = 'imgs/snow.jpg'
     }
-    forecastOneFeelsLike.innerHTML = res_forecast.data.list[3].main.feels_like
-    forecastOneHumidity.innerHTML = res_forecast.data.list[3].main.humidity
+    forecastOneFeelsLike.innerHTML = Math.round(res_forecast.data.list[3].main.feels_like)
+    forecastOneHumidity.innerHTML = Math.round(res_forecast.data.list[3].main.humidity)
     forecastOnePressure.innerHTML = res_forecast.data.list[3].main.pressure
-    forecastOneAverageTemp.innerHTML = res_forecast.data.list[3].main.temp
-    forecastOneTempMax.innerHTML = res_forecast.data.list[3].main.temp_max
-    forecastOneTempMin.innerHTML = res_forecast.data.list[3].main.temp_min
+    forecastOneAverageTemp.innerHTML = Math.round(res_forecast.data.list[3].main.temp)
+    forecastOneTempMax.innerHTML = Math.round(res_forecast.data.list[3].main.temp_max)
+    forecastOneTempMin.innerHTML = Math.round(res_forecast.data.list[3].main.temp_min)
+
     //Day Two Forecast 
     forecastTwoWeather.innerHTML = res_forecast.data.list[11].weather[0].main
-    forecastTwoWeatherDesc.innerHTML = res_forecast.data.list[11].weather[0].description
-    console.log(forecastTwoWeather.innerHTML)
+    forecastTwoWeatherDesc.innerHTML = toTitleCase(res_forecast.data.list[11].weather[0].description)
+    dayTwo.innerHTML = dayofWeek(res_forecast.data.list[11].dt_txt.substring(0, 10))
     if (forecastTwoWeather.innerHTML === 'Clouds') {
         forecastTwoImg.src = 'imgs/cloudy.jpg'
     } else if (forecastTwoWeather.innerHTML === 'Clear') {
@@ -126,15 +147,17 @@ form.addEventListener('submit', async function (e) {
     } else {
         forecastTwoImg.src = 'imgs/snow.jpg'
     }
-    forecastTwoFeelsLike.innerHTML = res_forecast.data.list[11].main.feels_like
-    forecastTwoHumidity.innerHTML = res_forecast.data.list[11].main.humidity
+    forecastTwoFeelsLike.innerHTML = Math.round(res_forecast.data.list[11].main.feels_like)
+    forecastTwoHumidity.innerHTML = Math.round(res_forecast.data.list[11].main.humidity)
     forecastTwoPressure.innerHTML = res_forecast.data.list[11].main.pressure
-    forecastTwoAverageTemp.innerHTML = res_forecast.data.list[11].main.temp
-    forecastTwoTempMax.innerHTML = res_forecast.data.list[11].main.temp_max
-    forecastTwoTempMin.innerHTML = res_forecast.data.list[11].main.temp_min
+    forecastTwoAverageTemp.innerHTML = Math.round(res_forecast.data.list[11].main.temp)
+    forecastTwoTempMax.innerHTML = Math.round(res_forecast.data.list[11].main.temp_max)
+    forecastTwoTempMin.innerHTML = Math.round(res_forecast.data.list[11].main.temp_min)
+
     // Day Three
     forecastThreeWeather.innerHTML = res_forecast.data.list[19].weather[0].main
-    forecastThreeWeatherDesc.innerHTML = res_forecast.data.list[19].weather[0].description
+    forecastThreeWeatherDesc.innerHTML = toTitleCase(res_forecast.data.list[19].weather[0].description)
+    dayThree.innerHTML = dayofWeek(res_forecast.data.list[19].dt_txt.substring(0, 10))
     if (forecastThreeWeather.innerHTML === 'Clouds') {
         forecastThreeImg.src = 'imgs/cloudy.jpg'
     } else if (forecastThreeWeather.innerHTML === 'Clear') {
@@ -142,15 +165,17 @@ form.addEventListener('submit', async function (e) {
     } else {
         forecastThreeImg.src = 'imgs/snow.jpg'
     }
-    forecastThreeFeelsLike.innerHTML = res_forecast.data.list[19].main.feels_like
-    forecastThreeHumidity.innerHTML = res_forecast.data.list[19].main.humidity
+    forecastThreeFeelsLike.innerHTML = Math.round(res_forecast.data.list[19].main.feels_like)
+    forecastThreeHumidity.innerHTML = Math.round(res_forecast.data.list[19].main.humidity)
     forecastThreePressure.innerHTML = res_forecast.data.list[19].main.pressure
-    forecastThreeAverageTemp.innerHTML = res_forecast.data.list[19].main.temp
-    forecastThreeTempMax.innerHTML = res_forecast.data.list[19].main.temp_max
-    forecastThreeTempMin.innerHTML = res_forecast.data.list[19].main.temp_min
+    forecastThreeAverageTemp.innerHTML = Math.round(res_forecast.data.list[19].main.temp)
+    forecastThreeTempMax.innerHTML = Math.round(res_forecast.data.list[19].main.temp_max)
+    forecastThreeTempMin.innerHTML = Math.round(res_forecast.data.list[19].main.temp_min)
+
     //Day4
     forecastFourWeather.innerHTML = res_forecast.data.list[27].weather[0].main
-    forecastFourWeatherDesc.innerHTML = res_forecast.data.list[27].weather[0].description
+    forecastFourWeatherDesc.innerHTML = toTitleCase(res_forecast.data.list[27].weather[0].description)
+    dayFour.innerHTML = dayofWeek(res_forecast.data.list[27].dt_txt.substring(0, 10))
     if (forecastFourWeather.innerHTML === 'Clouds') {
         forecastFourImg.src = 'imgs/cloudy.jpg'
     } else if (forecastFourWeather.innerHTML === 'Clear') {
@@ -158,15 +183,17 @@ form.addEventListener('submit', async function (e) {
     } else {
         forecastFourImg.src = 'imgs/snow.jpg'
     }
-    forecastFourFeelsLike.innerHTML = res_forecast.data.list[27].main.feels_like
-    forecastFourHumidity.innerHTML = res_forecast.data.list[27].main.humidity
+    forecastFourFeelsLike.innerHTML = Math.round(res_forecast.data.list[27].main.feels_like)
+    forecastFourHumidity.innerHTML = Math.round(res_forecast.data.list[27].main.humidity)
     forecastFourPressure.innerHTML = res_forecast.data.list[27].main.pressure
-    forecastFourAverageTemp.innerHTML = res_forecast.data.list[27].main.temp
-    forecastFourTempMax.innerHTML = res_forecast.data.list[27].main.temp_max
-    forecastFourTempMin.innerHTML = res_forecast.data.list[27].main.temp_min
+    forecastFourAverageTemp.innerHTML = Math.round(res_forecast.data.list[27].main.temp)
+    forecastFourTempMax.innerHTML = Math.round(res_forecast.data.list[27].main.temp_max)
+    forecastFourTempMin.innerHTML = Math.round(res_forecast.data.list[27].main.temp_min)
+
     //Day5
     forecastFiveWeather.innerHTML = res_forecast.data.list[35].weather[0].main
-    forecastFiveWeatherDesc.innerHTML = res_forecast.data.list[35].weather[0].description
+    forecastFiveWeatherDesc.innerHTML = toTitleCase(res_forecast.data.list[35].weather[0].description)
+    dayFive.innerHTML = dayofWeek(res_forecast.data.list[35].dt_txt.substring(0, 10))
     if (forecastFiveWeather.innerHTML === 'Clouds') {
         forecastFiveImg.src = 'imgs/cloudy.jpg'
     } else if (forecastFiveWeather.innerHTML === 'Clear') {
@@ -174,29 +201,18 @@ form.addEventListener('submit', async function (e) {
     } else {
         forecastFiveImg.src = 'imgs/snow.jpg'
     }
-    forecastFiveFeelsLike.innerHTML = res_forecast.data.list[35].main.feels_like
-    forecastFiveHumidity.innerHTML = res_forecast.data.list[35].main.humidity
+    forecastFiveFeelsLike.innerHTML = Math.round(res_forecast.data.list[35].main.feels_like)
+    forecastFiveHumidity.innerHTML = Math.round(res_forecast.data.list[35].main.humidity)
     forecastFivePressure.innerHTML = res_forecast.data.list[35].main.pressure
-    forecastFiveAverageTemp.innerHTML = res_forecast.data.list[35].main.temp
-    forecastFiveTempMax.innerHTML = res_forecast.data.list[35].main.temp_max
-    forecastFiveTempMin.innerHTML = res_forecast.data.list[35].main.temp_min
+    forecastFiveAverageTemp.innerHTML = Math.round(res_forecast.data.list[35].main.temp)
+    forecastFiveTempMax.innerHTML = Math.round(res_forecast.data.list[35].main.temp_max)
+    forecastFiveTempMin.innerHTML = Math.round(res_forecast.data.list[35].main.temp_min)
 })
 
-// Day of week 
-const dayZero = document.querySelector('#dayZero')
-const dayOne = document.querySelector('#dayOne')
-const dayTwo = document.querySelector('#dayTwo')
-const dayThree = document.querySelector('#dayThree')
-const dayFour = document.querySelector('#dayFour')
-const dayFive = document.querySelector('#dayFive')
 
 
-let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-let now = new Date()
 
-dayZero.innerHTML = daysOfWeek[now.getDay()]
-dayOne.innerHTML = daysOfWeek[now.getDay() + 1]
-dayTwo.innerHTML = daysOfWeek[now.getDay() + 2]
-dayThree.innerHTML = daysOfWeek[now.getDay() + 3]
-dayFour.innerHTML = daysOfWeek[now.getDay() + 4]
-dayFive.innerHTML = daysOfWeek[now.getDay() + 5]
+// let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+// let now = new Date()
+
+// dayZero.innerHTML = daysOfWeek[now.getDay()]

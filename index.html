@@ -14,55 +14,63 @@
 
 
 <body>
-    <h1>Enter City Name</h1>
-    <form id="searchForm">
-        <input type="text" placeholder='City Name' name='query'>
-        <button>Search</button>
-    </form>
+
+
     <div class='container'>
-        <div class="row row-cols-1 row-cols-md-6 g-4">
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-header">
-                        <span id='dayZero'> </span>
-                    </div>
+        <h1>Enter City Name</h1>
+        <form id="searchForm" class="mb-3">
+            <input type="text" placeholder='City Name' name='query'>
+            <button>Search</button>
+        </form>
+        <div class="card mb-3">
+            <div class="card-header">
+                <span id='dayZero'> </span>
+            </div>
+            <div class="row g-0">
+                <div class="col-md-4">
                     <img src="imgs/clear.jpg" class="card-img-top" id='currentDayImg' alt="...">
+                </div>
+                <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title" id='currentWeather'></h5>
-                        <h5 class="card-title"><span id='averageTemp'></span><span>&#8451;</span></h5>
-                        <ul class="list-group list-group-flush">
+                        <h5 class="card-title currentWeather" id='currentWeather'></h5>
+                        <h5 class="card-title currentWeather"><span id='averageTemp'></span><span>&#8451;</span></h5>
+                        <ul class="list-group list-group-flush main-card-text">
                             <li class="list-group-item">
-                                <p><b>Description:</b></p>
+                                <p><b>Description</b></p>
                                 <span id='currentWeatherDesc'> </span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Feels Like:</b></p>
+                                <p><b>Feels Like</b></p>
                                 <span id='feelsLike'> </span><span>&#8451;</span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Temp Max:</b></p>
+                                <p><b>Temp Max</b></p>
                                 <span id='tempMax'> </span><span>&#8451;</span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Temp Min: </b></p>
+                                <p><b>Temp Min</b></p>
                                 <span id='tempMin'> </span><span>&#8451;</span>
                             </li>
 
                             <li class="list-group-item">
-                                <p><b>Humidity:</b></p>
+                                <p><b>Humidity</b></p>
                                 <span id='humidity'> </span><span>%</span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Pressure:</b></p>
+                                <p><b>Pressure</b></p>
                                 <span id='pressure'> </span><span>Pa</span>
                             </li>
                         </ul>
                     </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
                 </div>
             </div>
+        </div>
+
+
+
+
+
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-5 g-4 mb-3">
             <div class="col">
                 <div class="card h-100">
                     <div class="card-header">
@@ -74,34 +82,34 @@
                         <h5 class="card-title"><span id='forecastOneAverageTemp'></span><span>&#8451;</span></h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <p><b>Description:</b></p>
+                                <p><b>Description</b></p>
                                 <span id='forecastOneWeatherDesc'> </span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Feels Like:</b></p>
+                                <p><b>Feels Like</b></p>
                                 <span id='forecastOneFeelsLike'> </span>
                                 <span>&#8451;</span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Temp Max:</b></p>
+                                <p><b>Temp Max</b></p>
                                 <span id='forecastOneTempMax'> </span>
                                 <span>&#8451;</span>
                             </li>
 
                             <li class="list-group-item">
-                                <p><b>Temp Min: </b></p>
+                                <p><b>Temp Min </b></p>
                                 <span id='forecastOneTempMin'> </span>
                                 <span>&#8451;</span>
                             </li>
 
                             <li class="list-group-item">
-                                <p><b>Humidity:</b></p>
+                                <p><b>Humidity</b></p>
                                 <span id='forecastOneHumidity'> </span>
                                 <span>%</span>
                             </li>
 
                             <li class="list-group-item">
-                                <p><b>Pressure:</b></p> <span id='forecastOnePressure'> </span>
+                                <p><b>Pressure</b></p> <span id='forecastOnePressure'> </span>
                                 <span>Pa</span>
                             </li>
 
@@ -127,32 +135,32 @@
                         <ul class="list-group list-group-flush">
 
                             <li class="list-group-item">
-                                <p><b>Description:</b></p>
+                                <p><b>Description</b></p>
                                 <span id='forecastTwoWeatherDesc'> </span>
                             </li>
 
 
                             <li class="list-group-item">
-                                <p><b>Feels Like:</b></p>
+                                <p><b>Feels Like</b></p>
                                 <span id='forecastTwoFeelsLike'> </span><span>&#8451;</span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Temp Max:</b></p>
+                                <p><b>Temp Max</b></p>
                                 <span id='forecastTwoTempMax'> </span><span>&#8451;</span>
                             </li>
 
                             <li class="list-group-item">
-                                <p><b>Temp Min: </b></p>
+                                <p><b>Temp Min </b></p>
                                 <span id='forecastTwoTempMin'> </span><span>&#8451;</span>
                             </li>
 
                             <li class="list-group-item">
-                                <p><b>Humidity:</b></p>
+                                <p><b>Humidity</b></p>
                                 <span id='forecastTwoHumidity'> </span><span>%</span>
                             </li>
 
                             <li class="list-group-item">
-                                <p><b>Pressure:</b></p>
+                                <p><b>Pressure</b></p>
                                 <span id='forecastTwoPressure'> </span><span>Pa</span>
                             </li>
                         </ul>
@@ -173,32 +181,32 @@
                         <h5 class="card-title"><span id='forecastThreeAverageTemp'></span><span>&#8451;</span></h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <p><b>Description:</b></p>
+                                <p><b>Description</b></p>
                                 <span id='forecastThreeWeatherDesc'> </span>
                             </li>
 
                             <li class="list-group-item">
-                                <p><b>Feels Like:</b></p>
+                                <p><b>Feels Like</b></p>
                                 <span id='forecastThreeFeelsLike'> </span><span>&#8451;</span>
                             </li>
 
                             <li class="list-group-item">
-                                <p><b>Temp Max:</b></p>
+                                <p><b>Temp Max</b></p>
                                 <span id='forecastThreeTempMax'> </span><span>&#8451;</span>
                             </li>
 
                             <li class="list-group-item">
-                                <p><b>Temp Min: </b></p>
+                                <p><b>Temp Min </b></p>
                                 <span id='forecastThreeTempMin'> </span><span>&#8451;</span>
                             </li>
 
                             <li class="list-group-item">
-                                <p><b>Humidity:</b></p>
+                                <p><b>Humidity</b></p>
                                 <span id='forecastThreeHumidity'> </span><span>%</span>
                             </li>
 
                             <li class="list-group-item">
-                                <p><b>Pressure:</b></p>
+                                <p><b>Pressure</b></p>
                                 <span id='forecastThreePressure'> </span><span>Pa</span>
                             </li>
                         </ul>
@@ -220,28 +228,28 @@
 
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <p><b>Description:</b></p>
+                                <p><b>Description</b></p>
                                 <span id='forecastFourWeatherDesc'> </span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Feels Like:</b></p>
+                                <p><b>Feels Like</b></p>
                                 <span id='forecastFourFeelsLike'> </span><span>&#8451;</span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Temp Max:</b></p>
+                                <p><b>Temp Max</b></p>
                                 <span id='forecastFourTempMax'> </span><span>&#8451;</span>
                             </li>
 
                             <li class="list-group-item">
-                                <p><b>Temp Min: </b></p>
+                                <p><b>Temp Min </b></p>
                                 <span id='forecastFourTempMin'> </span><span>&#8451;</span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Humidity:</b></p>
+                                <p><b>Humidity</b></p>
                                 <span id='forecastFourHumidity'> </span><span>%</span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Pressure:</b></p>
+                                <p><b>Pressure</b></p>
                                 <span id='forecastFourPressure'> </span><span>Pa</span>
                             </li>
                         </ul>
@@ -262,27 +270,27 @@
                         <h5 class="card-title"><span id='forecastFiveAverageTemp'></span><span>&#8451;</span></h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <p><b>Description:</b></p>
+                                <p><b>Description</b></p>
                                 <span id='forecastFiveWeatherDesc'> </span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Feels Like:</b></p>
+                                <p><b>Feels Like</b></p>
                                 <span id='forecastFiveFeelsLike'> </span><span>&#8451;</span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Temp Max:</b></p>
+                                <p><b>Temp Max</b></p>
                                 <span id='forecastFiveTempMax'> </span><span>&#8451;</span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Temp Min: </b></p>
+                                <p><b>Temp Min </b></p>
                                 <span id='forecastFiveTempMin'> </span><span>&#8451;</span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Humidity:</b></p>
+                                <p><b>Humidity</b></p>
                                 <span id='forecastFiveHumidity'> </span><span>%</span>
                             </li>
                             <li class="list-group-item">
-                                <p><b>Pressure:</b></p>
+                                <p><b>Pressure</b></p>
                                 <span id='forecastFivePressure'> </span><span>Pa</span>
                             </li>
                         </ul>
